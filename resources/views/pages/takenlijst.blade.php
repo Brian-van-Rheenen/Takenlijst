@@ -30,5 +30,4 @@
     </script>
     <script src="{{ URL::asset('js/bundle.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.12.1/printThis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ns-autogrow/1.1.6/jquery.ns-autogrow.min.js"></script>
 @endsection

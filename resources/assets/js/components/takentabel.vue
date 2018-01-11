@@ -97,10 +97,13 @@
                         { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
                     ] }
                 ],
-                personeel: this.werknemers
+                personeel: this.werknemers,
+                unsavedchanges: false
             }
         },
         mounted() {
+            window.onbeforeunload = this.unloadPage;
+
             if (this.databasetaken.length > 0)
             {
                 for (var i = 0; i < this.databasetaken.length; ++i)
@@ -171,6 +174,7 @@
                         $(this).text('Het opslaan is gelukt.');
                         $(this).removeClass('mislukt').addClass('gelukt');
                     }).animate({'opacity': 1}, 500).delay(5000).animate({'opacity': 0}, 500);
+                    this.unsavedchanges = false;
                 })
                 .catch(function (error) {
                     $('.melding').animate({'opacity': 0}, 100, function () {
@@ -218,6 +222,7 @@
                     }
                 }
                 this.autoresize();
+                this.unsavedchanges = true;
 
                 for (var i = 0; i < this.dagen.length; ++i)
                 {
@@ -270,6 +275,14 @@
                         $(this).height(this.scrollHeight);
                     });
                 });
+            },
+            unloadPage()
+            {
+                var unsaved = this.unsavedchanges;
+                if(unsaved)
+                {
+                    return "De veranderingen die je gemaakt hebt zijn nog niet opgeslagen. Weet je zeker dat je weg wilt?";
+                }
             }
         }
     }
