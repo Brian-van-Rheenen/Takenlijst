@@ -20,7 +20,7 @@ class UpdateTakenWerknemerid extends Migration
         }
 
         Schema::table('taken', function (Blueprint $table) {
-            $table->integer('werknemer_id')->nullable()->after('taak');
+            $table->string('werknemer_id')->nullable()->after('taak');
         });
     }
 

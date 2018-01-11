@@ -15,15 +15,17 @@ $(document).on('click', '.select-dropdown', function(event)
     });
 
     var dropdown = $(event.target).parent().find('.dropdown-content > li');
+    var werknemers = $(event.target).parent().find('.select-dropdown').val().split(', ');
 
     $(dropdown).each(function(i, obj) {
-        if ($(obj).find('span').text() == $(event.target).parent().find('.select-dropdown').val())
+        $(this).removeClass('selected');
+
+        for (var i = 0; i < werknemers.length; i++)
         {
-            $(this).addClass('selected');
-        }
-        else
-        {
-            $(this).removeClass('selected');
+            if ($(obj).find('span').text() == werknemers[i])
+            {
+                $(this).addClass('selected');
+            }
         }
     });
 });

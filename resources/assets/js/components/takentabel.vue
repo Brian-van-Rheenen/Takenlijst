@@ -11,9 +11,8 @@
                 <td v-for="taak in taken">
                     <div class="select-wrapper">
                         <span class="caret no-print">▼</span>
-                        <input type="text" class="select-dropdown" value="" v-bind:name="[dag.dag,taak.beschrijving]" readonly>
+                        <textarea type="text" class="select-dropdown" value="" v-bind:name="[dag.dag,taak.beschrijving]" readonly></textarea>
                         <ul class="dropdown-content">
-                            <li v-on:click="keuze(dag.dag,taak.beschrijving,null)"></li>
                             <li v-for="persoon in personeel" v-on:click="keuze(dag.dag,taak.beschrijving,persoon.id)">
                                 <span v-text="persoon.naam"></span>
                             </li>
@@ -114,21 +113,43 @@
                             {
                                 if (this.databasetaken[i].taak == this.dagen[j].taken[k].beschrijving)
                                 {
-                                    var index = this.personeel.findIndex(x => x.id==this.databasetaken[i].werknemer_id);
-                                    if (index != -1)
+                                    if (this.databasetaken[i].werknemer_id != null)
                                     {
-                                        this.dagen[j].taken[k].werknemer = this.databasetaken[i].werknemer_id;
+                                        var werknemer_ids = this.databasetaken[i].werknemer_id.split(', ');
 
-                                        var dag = this.databasetaken[i].dag;
-                                        var taak = this.databasetaken[i].taak;
-                                        var naam = this.personeel[index].naam;
-
-                                        $(".select-dropdown").each(function() {
-                                            if (this.name == dag + ',' + taak)
+                                        for (var l = 0; l < werknemer_ids.length; l++)
+                                        {
+                                            var index = this.personeel.findIndex(x => x.id==werknemer_ids[l]);
+                                            if (index != -1)
                                             {
-                                                $(this).val(naam);
+                                                if (this.dagen[j].taken[k].werknemer != null)
+                                                {
+                                                    this.dagen[j].taken[k].werknemer = this.dagen[j].taken[k].werknemer + ', ' + werknemer_ids[l];
+                                                }
+                                                else
+                                                {
+                                                    this.dagen[j].taken[k].werknemer = werknemer_ids[l];
+                                                }
+
+                                                var dag = this.databasetaken[i].dag;
+                                                var taak = this.databasetaken[i].taak;
+                                                var naam = this.personeel[index].naam;
+
+                                                $(".select-dropdown").each(function() {
+                                                    if (this.name == dag + ',' + taak)
+                                                    {
+                                                        if ($(this).val() == '')
+                                                        {
+                                                            $(this).val(naam);
+                                                        }
+                                                        else
+                                                        {
+                                                            $(this).val($(this).val() + ', ' + naam);
+                                                        }
+                                                    }
+                                                });
                                             }
-                                        });
+                                        }
                                     }
                                 }
                             }
@@ -136,6 +157,7 @@
                     }
                 }
             }
+            this.autoresize();
         },
         methods: {
             printen() {
@@ -162,7 +184,40 @@
                     'opacity' : '0',
                     'max-height' : '0px'
                 });
-                $(event.target).parentsUntil('td').find('.select-dropdown').val(event.target.innerHTML);
+
+                var value = $(event.target).parentsUntil('td').find('.select-dropdown').val();
+                var naam = event.target.innerHTML;
+
+                if (value == '')
+                {
+                    $(event.target).parentsUntil('td').find('.select-dropdown').val(naam);
+                }
+                else
+                {
+                    if (value.indexOf(naam) != -1)
+                    {
+                        if (value.substring(0, naam.toString().length) == naam)
+                        {
+                            if (value.substring(0, naam.toString().length + 2) == naam + ', ')
+                            {
+                                $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(naam + ', ', ''));
+                            }
+                            else
+                            {
+                                $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(naam, ''));
+                            }
+                        }
+                        else
+                        {
+                            $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(', ' + naam, ''));
+                        }
+                    }
+                    else
+                    {
+                        $(event.target).parentsUntil('td').find('.select-dropdown').val(value + ', ' + naam);
+                    }
+                }
+                this.autoresize();
 
                 for (var i = 0; i < this.dagen.length; ++i)
                 {
@@ -172,11 +227,49 @@
                         {
                             if (this.dagen[i].taken[j].beschrijving == taak)
                             {
-                                this.dagen[i].taken[j].werknemer = werknemer_id;
+                                if (this.dagen[i].taken[j].werknemer == null || this.dagen[i].taken[j].werknemer == '')
+                                {
+                                    this.dagen[i].taken[j].werknemer = werknemer_id.toString();
+                                }
+                                else
+                                {
+                                    var string = this.dagen[i].taken[j].werknemer.toString();
+
+                                    if (string.indexOf(werknemer_id) != -1)
+                                    {
+                                        if (string.substring(0, werknemer_id.toString().length) == werknemer_id)
+                                        {
+                                            if (string.substring(0, werknemer_id.toString().length + 2) == werknemer_id + ', ')
+                                            {
+                                                this.dagen[i].taken[j].werknemer = this.dagen[i].taken[j].werknemer.replace(werknemer_id + ', ', '');
+                                            }
+                                            else
+                                            {
+                                                this.dagen[i].taken[j].werknemer = this.dagen[i].taken[j].werknemer.replace(werknemer_id, '');
+                                            }
+                                        }
+                                        else
+                                        {
+                                            this.dagen[i].taken[j].werknemer = this.dagen[i].taken[j].werknemer.replace(', ' + werknemer_id, '');
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.dagen[i].taken[j].werknemer = this.dagen[i].taken[j].werknemer + ', ' + werknemer_id;
+                                    }
+                                }
                             }
                         }
                     }
                 }
+            },
+            autoresize() {
+                $(function() {
+                    $('textarea').each(function() {
+                        $(this).css('height','auto');
+                        $(this).height(this.scrollHeight);
+                    });
+                });
             }
         }
     }
