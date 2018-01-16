@@ -180,6 +180,7 @@
                         });
                     }
                 }
+                this.unsavedchanges = true;
             },
             opslaan() {
                 axios.post('/opslaan', {
