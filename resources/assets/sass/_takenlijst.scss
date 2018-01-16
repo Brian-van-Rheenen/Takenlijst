@@ -109,6 +109,16 @@
         }
     }
 
+    .reset {
+        color: #FFF;
+        background: #ea3f3f;
+        margin-left: 0.5rem;
+
+        &:hover {
+            background: #d23838;
+        }
+    }
+
     .gelukt {
         color: #5cb85c;
         font-weight: bolder;

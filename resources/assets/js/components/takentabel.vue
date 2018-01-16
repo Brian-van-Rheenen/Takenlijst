@@ -23,7 +23,10 @@
         </table>
 
         <div class="knoppen">
-            <button class="print" v-on:click="printen">Print</button>
+            <div class="knoppen-links">
+                <button class="print" v-on:click="printen">Print</button>
+                <button class="reset" v-on:click="reset">Resetten</button>
+            </div>
             <span class="melding"></span>
             <button class="opslaan" v-on:click="opslaan">Opslaan</button>
         </div>
@@ -165,6 +168,18 @@
         methods: {
             printen() {
                 $('.taken').printThis();
+            },
+            reset() {
+                for (var i = 0; i < this.dagen.length; ++i)
+                {
+                    for (var j = 0; j < this.dagen[i].taken.length; ++j)
+                    {
+                        this.dagen[i].taken[j].werknemer = null;
+                        $(".select-dropdown").each(function() {
+                            $(this).val('');
+                        });
+                    }
+                }
             },
             opslaan() {
                 axios.post('/opslaan', {
