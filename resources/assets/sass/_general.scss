@@ -28,7 +28,11 @@ table {
     background-color: #fff;
     border-collapse: collapse;
 
-    tr:first-child {
+    &:nth-child(2) {
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    thead tr:first-child {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     }
 
@@ -36,7 +40,25 @@ table {
         text-align: left;
         padding: 1.6rem;
         vertical-align: top;
-        max-width: 170px;
+        max-width: 250px;
+        min-width: 250px;
+    }
+
+    .colspan-border-fix {
+        display: none;
+        height: 0;
+        padding: 0;
+    }
+
+    .header {
+        td {
+            text-align: center;
+            padding-bottom: 0;
+        }
+
+        &.wekelijks td {
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
     }
 
     th {

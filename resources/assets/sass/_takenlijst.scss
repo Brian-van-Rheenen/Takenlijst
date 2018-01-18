@@ -213,11 +213,6 @@
         resize: none;
         width: calc(100% - 10px);
         overflow: hidden;
-
-        @media print
-        {
-            width: auto;
-        }
     }
 
     .dropdown-content {
@@ -270,9 +265,9 @@
 
 @media print
 {
-    @page {
-        size: landscape;
-    }
+    // @page {
+    //     size: landscape;
+    // }
 
     body {
       -webkit-print-color-adjust: exact;
@@ -280,8 +275,30 @@
       font-size: 18px !important;
     }
 
+    .week th {
+        padding-top: 70px !important;
+    }
+
+    thead th {
+        font-size: 16px !important;
+    }
+
+    tbody td:first-child {
+        font-size: 12px !important;
+    }
+
+    .header {
+        td {
+            font-size: 15px !important;
+        }
+        &.wekelijks td {
+            border-top: none !important;
+        }
+    }
+
     .select-dropdown {
-        font-size: 15px !important;
+        font-size: 12px !important;
+        height: auto !important;
     }
 
     .no-print, .no-print *
@@ -289,11 +306,13 @@
         display: none !important;
     }
 
-    tr:nth-child(even) {
+    tbody tr:nth-child(odd) {
         background-color: #f7f7f7 !important;
     }
 
     th, td {
         padding: 1.3rem !important;
+        max-width: 140px !important;
+        min-width: 0 !important;
     }
 }

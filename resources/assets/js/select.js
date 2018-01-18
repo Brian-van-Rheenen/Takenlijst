@@ -15,7 +15,7 @@ $(document).on('click', '.select-dropdown', function(event)
     });
 
     var dropdown = $(event.target).parent().find('.dropdown-content > li');
-    var werknemers = $(event.target).parent().find('.select-dropdown').val().split(', ');
+    var werknemers = $(event.target).parent().find('.select-dropdown').text().split(', ');
 
     $(dropdown).each(function(i, obj) {
         $(this).removeClass('selected');

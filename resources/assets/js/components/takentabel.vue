@@ -1,25 +1,74 @@
 <template>
     <div class="lijst-container">
         <table class="taken">
-            <tr>
-                <th></th>
-                <th v-for="taak in taken" v-text="taak.beschrijving"></th>
-            </tr>
 
-            <tr v-for="dag in dagen">
-                <td v-text="dag.dag"></td>
-                <td v-for="taak in taken">
-                    <div class="select-wrapper">
-                        <span class="caret no-print">▼</span>
-                        <textarea type="text" class="select-dropdown" value="" v-bind:name="[dag.dag,taak.beschrijving]" readonly></textarea>
-                        <ul class="dropdown-content">
-                            <li v-for="persoon in personeel" v-on:click="keuze(dag.dag,taak.beschrijving,persoon.id)">
-                                <span v-text="persoon.naam"></span>
-                            </li>
-                        </ul>
-                    </div>
+            <!-- Dag taken -->
+
+            <thead class="dag">
+                <tr>
+                    <th></th>
+                    <th v-for="dag in dagen" v-text="dag.dag"></th>
+                </tr>
+            </thead>
+
+            <tr><td class="colspan-border-fix"></td></tr>
+
+            <tr class="header dagelijks">
+                <td colspan="6">
+                    <span>Dag taken</span>
                 </td>
             </tr>
+
+            <tbody>
+                <tr v-for="taak in dagtaken">
+                    <td v-text="taak.beschrijving"></td>
+                    <td v-for="dag in dagen">
+                        <div class="select-wrapper">
+                            <span class="caret no-print">▼</span>
+                            <div class="select-dropdown" v-bind:name="[dag.dag,taak.beschrijving]"></div>
+                            <ul class="dropdown-content">
+                                <li v-for="persoon in personeel" v-on:click="keuze(dag.dag,taak.beschrijving,persoon.id)">
+                                    <span v-text="persoon.naam"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <!-- Week taken -->
+
+            <thead class="week">
+                <tr>
+                    <th></th>
+                    <th v-for="dag in dagen" v-text="dag.dag"></th>
+                </tr>
+            </thead>
+
+            <tr><td class="colspan-border-fix"></td></tr>
+
+            <tr class="header wekelijks">
+                <td colspan="6">
+                    <span>Week taken</span>
+                </td>
+            </tr>
+
+            <tbody>
+                <tr v-for="taak in weektaken">
+                    <td v-text="taak.beschrijving"></td>
+                    <td v-for="dag in dagen">
+                        <div class="select-wrapper">
+                            <span class="caret no-print">▼</span>
+                            <div class="select-dropdown" v-bind:name="[dag.dag,taak.beschrijving]"></div>
+                            <ul class="dropdown-content">
+                                <li v-for="persoon in personeel" v-on:click="keuze(dag.dag,taak.beschrijving,persoon.id)">
+                                    <span v-text="persoon.naam"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <div class="knoppen">
@@ -38,66 +87,80 @@
         props: ['databasetaken', 'werknemers'],
         data() {
             return {
-                taken: [
-                    { beschrijving: "Vaatwasser uitruimen" },
-                    { beschrijving: "Tafeldekken" },
+                dagtaken: [
+                    { beschrijving: "Tafeldekken & Vaatwasser uitruimen" },
                     { beschrijving: "Afruimen" },
+                    { beschrijving: "Vaatwasser starten" },
+                    { beschrijving: "Vuilniszak legen" },
+                    { beschrijving: "Round check" }
+                ],
+                weektaken: [
                     { beschrijving: "WC schoonmaken" },
                     { beschrijving: "Vegen/dweilen of stofzuigen" },
-                    { beschrijving: "Bureau schoonmaken" },
                     { beschrijving: "Koelkast schoonmaken" },
-                    { beschrijving: "Kastjesdeuren en aanrecht schoonmaken" }
+                    { beschrijving: "Kastjesdeuren en aanrecht schoonmaken" },
+                    { beschrijving: "Bureau schoonmaken" }
                 ],
                 dagen: [
                     { dag: "Maandag", taken: [
-                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
-                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
+                        { beschrijving: "Vaatwasser starten", werknemer: null },
+                        { beschrijving: "Vuilniszak legen", werknemer: null },
+                        { beschrijving: "Round check", werknemer: null },
                         { beschrijving: "WC schoonmaken", werknemer: null },
                         { beschrijving: "Vegen/dweilen of stofzuigen", werknemer: null },
-                        { beschrijving: "Bureau schoonmaken", werknemer: null },
                         { beschrijving: "Koelkast schoonmaken", werknemer: null },
-                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
+                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null },
+                        { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Dinsdag", taken: [
-                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
-                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
+                        { beschrijving: "Vaatwasser starten", werknemer: null },
+                        { beschrijving: "Vuilniszak legen", werknemer: null },
+                        { beschrijving: "Round check", werknemer: null },
                         { beschrijving: "WC schoonmaken", werknemer: null },
                         { beschrijving: "Vegen/dweilen of stofzuigen", werknemer: null },
-                        { beschrijving: "Bureau schoonmaken", werknemer: null },
                         { beschrijving: "Koelkast schoonmaken", werknemer: null },
-                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
+                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null },
+                        { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Woensdag", taken: [
-                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
-                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
+                        { beschrijving: "Vaatwasser starten", werknemer: null },
+                        { beschrijving: "Vuilniszak legen", werknemer: null },
+                        { beschrijving: "Round check", werknemer: null },
                         { beschrijving: "WC schoonmaken", werknemer: null },
                         { beschrijving: "Vegen/dweilen of stofzuigen", werknemer: null },
-                        { beschrijving: "Bureau schoonmaken", werknemer: null },
                         { beschrijving: "Koelkast schoonmaken", werknemer: null },
-                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
+                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null },
+                        { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Donderdag", taken: [
-                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
-                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
+                        { beschrijving: "Vaatwasser starten", werknemer: null },
+                        { beschrijving: "Vuilniszak legen", werknemer: null },
+                        { beschrijving: "Round check", werknemer: null },
                         { beschrijving: "WC schoonmaken", werknemer: null },
                         { beschrijving: "Vegen/dweilen of stofzuigen", werknemer: null },
-                        { beschrijving: "Bureau schoonmaken", werknemer: null },
                         { beschrijving: "Koelkast schoonmaken", werknemer: null },
-                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
+                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null },
+                        { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Vrijdag", taken: [
-                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
-                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
+                        { beschrijving: "Vaatwasser starten", werknemer: null },
+                        { beschrijving: "Vuilniszak legen", werknemer: null },
+                        { beschrijving: "Round check", werknemer: null },
                         { beschrijving: "WC schoonmaken", werknemer: null },
                         { beschrijving: "Vegen/dweilen of stofzuigen", werknemer: null },
-                        { beschrijving: "Bureau schoonmaken", werknemer: null },
                         { beschrijving: "Koelkast schoonmaken", werknemer: null },
-                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null }
+                        { beschrijving: "Kastjesdeuren en aanrecht schoonmaken", werknemer: null },
+                        { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] }
                 ],
                 personeel: this.werknemers,
@@ -142,15 +205,15 @@
                                                 var naam = this.personeel[index].naam;
 
                                                 $(".select-dropdown").each(function() {
-                                                    if (this.name == dag + ',' + taak)
+                                                    if ($(this).attr('name') == dag + ',' + taak)
                                                     {
-                                                        if ($(this).val() == '')
+                                                        if ($(this).text() == '')
                                                         {
-                                                            $(this).val(naam);
+                                                            $(this).text(naam);
                                                         }
                                                         else
                                                         {
-                                                            $(this).val($(this).val() + ', ' + naam);
+                                                            $(this).text($(this).text() + ', ' + naam);
                                                         }
                                                     }
                                                 });
@@ -176,7 +239,7 @@
                     {
                         this.dagen[i].taken[j].werknemer = null;
                         $(".select-dropdown").each(function() {
-                            $(this).val('');
+                            $(this).text('');
                         });
                     }
                 }
@@ -205,12 +268,12 @@
                     'max-height' : '0px'
                 });
 
-                var value = $(event.target).parentsUntil('td').find('.select-dropdown').val();
+                var value = $(event.target).parentsUntil('td').find('.select-dropdown').text();
                 var naam = event.target.innerHTML;
 
                 if (value == '')
                 {
-                    $(event.target).parentsUntil('td').find('.select-dropdown').val(naam);
+                    $(event.target).parentsUntil('td').find('.select-dropdown').text(naam);
                 }
                 else
                 {
@@ -220,21 +283,21 @@
                         {
                             if (value.substring(0, naam.toString().length + 2) == naam + ', ')
                             {
-                                $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(naam + ', ', ''));
+                                $(event.target).parentsUntil('td').find('.select-dropdown').text(value.replace(naam + ', ', ''));
                             }
                             else
                             {
-                                $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(naam, ''));
+                                $(event.target).parentsUntil('td').find('.select-dropdown').text(value.replace(naam, ''));
                             }
                         }
                         else
                         {
-                            $(event.target).parentsUntil('td').find('.select-dropdown').val(value.replace(', ' + naam, ''));
+                            $(event.target).parentsUntil('td').find('.select-dropdown').text(value.replace(', ' + naam, ''));
                         }
                     }
                     else
                     {
-                        $(event.target).parentsUntil('td').find('.select-dropdown').val(value + ', ' + naam);
+                        $(event.target).parentsUntil('td').find('.select-dropdown').text(value + ', ' + naam);
                     }
                 }
                 this.autoresize();
@@ -286,9 +349,15 @@
             },
             autoresize() {
                 $(function() {
-                    $('textarea').each(function() {
+                    $('.select-dropdown').each(function() {
+                        var height = this.scrollHeight;
+                        if (height == 0)
+                        {
+                            height = 28;
+                        }
+
                         $(this).css('height','auto');
-                        $(this).height(this.scrollHeight);
+                        $(this).height(height);
                     });
                 });
             },
