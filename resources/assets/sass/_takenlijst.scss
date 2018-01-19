@@ -19,11 +19,22 @@
         th, td {
             @media screen and (max-width: 1075px)
             {
+                max-width: 135px;
+                min-width: 135px;
                 padding: 0.6rem;
             }
 
             @media screen and (min-width: 1076px) and (max-width: 1215px)
             {
+                max-width: 170px;
+                min-width: 170px;
+                padding: 1rem;
+            }
+
+            @media screen and (min-width: 1216px) and (max-width: 1550px)
+            {
+                max-width: 190px;
+                min-width: 190px;
                 padding: 1rem;
             }
         }
@@ -38,6 +49,13 @@
 
     .ledenlijst {
         margin-top: 50px;
+
+        @media (max-width:480px) {
+            th, td {
+                max-width: 215px;
+                min-width: 215px;
+            }
+        }
 
         td {
             padding: 1rem 1.6rem 1rem 1.6rem;
@@ -299,6 +317,7 @@
     .select-dropdown {
         font-size: 12px !important;
         height: auto !important;
+        width: 100% !important;
     }
 
     .no-print, .no-print *
@@ -312,7 +331,7 @@
 
     th, td {
         padding: 1.3rem !important;
-        max-width: 140px !important;
+        max-width: 200px !important;
         min-width: 0 !important;
     }
 }

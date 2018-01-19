@@ -38,7 +38,7 @@
 
             <!-- Week taken -->
 
-            <thead class="week">
+            <thead class="week no-print">
                 <tr>
                     <th></th>
                     <th v-for="dag in dagen" v-text="dag.dag"></th>
