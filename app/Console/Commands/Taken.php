@@ -43,7 +43,7 @@ class Taken extends Command
         setlocale(LC_ALL, 'nl_NL.utf8');
         $dag = ucfirst(Carbon::now()->formatLocalized('%A'));
 
-        $taken = Taak::where('dag', $dag)->where('tijd', /*date('H:i')*/'14:10')->get();
+        $taken = Taak::where('dag', $dag)->where('tijd', date('H:i'))->get();
 
         $this->getTaken($taken);
     }
