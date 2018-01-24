@@ -43,7 +43,7 @@ class Taken extends Command
         setlocale(LC_ALL, 'nl_NL.utf8');
         $dag = ucfirst(Carbon::now()->formatLocalized('%A'));
 
-        $taken = Taak::where('dag', $dag)->where('tijd', date('H:i'))->get();
+        $taken = Taak::where('dag', $dag)->where('tijd', /*date('H:i')*/'14:10')->get();
 
         $this->getTaken($taken);
     }
@@ -66,19 +66,42 @@ class Taken extends Command
             {
                 foreach ($werknemers as $werknemer)
                 {
-                    // // Create a constant to store your Slack URL
-                    if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $werknemer[0]->webhook);
+                    if ($werknemer[0]->naam == 'Iedereen')
+                    {
+                        $personen = Werknemer::where('naam', '!=', 'Iedereen')->get();
+                        foreach ($personen as $persoon)
+                        {
+                            // // Create a constant to store your Slack URL
+                            if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $persoon->webhook);
 
-                    //Make your message
-                    $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet!: *' . $taak->taak . '*.')));
+                            //Make your message
+                            $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet!: *' . $taak->taak . '*.')));
 
-                    // Use curl to send your message
-                    $c = curl_init(SLACK_WEBHOOK);
-                    curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($c, CURLOPT_POST, true);
-                    curl_setopt($c, CURLOPT_POSTFIELDS, $message);
-                    curl_exec($c);
-                    curl_close($c);
+                            // Use curl to send your message
+                            $c = curl_init(SLACK_WEBHOOK);
+                            curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+                            curl_setopt($c, CURLOPT_POST, true);
+                            curl_setopt($c, CURLOPT_POSTFIELDS, $message);
+                            curl_exec($c);
+                            curl_close($c);
+                        }
+                    }
+                    else
+                    {
+                        // // Create a constant to store your Slack URL
+                        if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $werknemer[0]->webhook);
+
+                        //Make your message
+                        $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet!: *' . $taak->taak . '*.')));
+
+                        // Use curl to send your message
+                        $c = curl_init(SLACK_WEBHOOK);
+                        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($c, CURLOPT_POST, true);
+                        curl_setopt($c, CURLOPT_POSTFIELDS, $message);
+                        curl_exec($c);
+                        curl_close($c);
+                    }
                 }
             }
         }
