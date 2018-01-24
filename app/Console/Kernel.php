@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'app\Console\Commands\Taken',
+        'app\Console\Commands\Tijden',
     ];
 
     /**
@@ -24,8 +25,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('takenlijst:taken')
+                 ->dailyAt('09:15');
+
+        $schedule->command('takenlijst:taken')
+                 ->dailyAt('11:55');
+
+        $schedule->command('takenlijst:taken')
+                 ->dailyAt('12:15');
+
+        $schedule->command('takenlijst:taken')
+                 ->dailyAt('17:15');
     }
 
     /**

@@ -32,7 +32,7 @@ class TakenController extends Controller
     public function opslaan()
     {
         $data = request('taken');
-        Taak::truncate();
+        //Taak::truncate();
 
         foreach ($data as $dagen)
         {
@@ -47,11 +47,23 @@ class TakenController extends Controller
                         $taak = $taken[$i]['beschrijving'];
                         $werknemer_id = $taken[$i]['werknemer'];
 
-                        $temp_data['dag'] = $dag;
-                        $temp_data['taak'] = $taak;
-                        $temp_data['werknemer_id'] = $werknemer_id;
+                        $database_taak = Taak::where('dag', $dag)->where('taak', $taak)->get();
 
-                        Taak::create($temp_data);
+                        if(sizeof($database_taak) > 0)
+                        {
+                            $database_taak[0]->dag = $dag;
+                            $database_taak[0]->taak = $taak;
+                            $database_taak[0]->werknemer_id = $werknemer_id;
+                            $database_taak[0]->save();
+                        }
+                        else
+                        {
+                            $temp_data['dag'] = $dag;
+                            $temp_data['taak'] = $taak;
+                            $temp_data['werknemer_id'] = $werknemer_id;
+
+                            Taak::create($temp_data);
+                        }
                     }
                 }
             }

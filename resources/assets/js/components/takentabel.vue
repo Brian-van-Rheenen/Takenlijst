@@ -88,7 +88,8 @@
         data() {
             return {
                 dagtaken: [
-                    { beschrijving: "Tafeldekken & Vaatwasser uitruimen" },
+                    { beschrijving: "Tafeldekken" },
+                    { beschrijving: "Vaatwasser uitruimen" },
                     { beschrijving: "Afruimen" },
                     { beschrijving: "Vaatwasser starten" },
                     { beschrijving: "Vuilniszak legen" },
@@ -103,7 +104,8 @@
                 ],
                 dagen: [
                     { dag: "Maandag", taken: [
-                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
+                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
                         { beschrijving: "Vaatwasser starten", werknemer: null },
                         { beschrijving: "Vuilniszak legen", werknemer: null },
@@ -115,7 +117,8 @@
                         { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Dinsdag", taken: [
-                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
+                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
                         { beschrijving: "Vaatwasser starten", werknemer: null },
                         { beschrijving: "Vuilniszak legen", werknemer: null },
@@ -127,7 +130,8 @@
                         { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Woensdag", taken: [
-                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
+                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
                         { beschrijving: "Vaatwasser starten", werknemer: null },
                         { beschrijving: "Vuilniszak legen", werknemer: null },
@@ -139,7 +143,8 @@
                         { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Donderdag", taken: [
-                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
+                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
                         { beschrijving: "Vaatwasser starten", werknemer: null },
                         { beschrijving: "Vuilniszak legen", werknemer: null },
@@ -151,7 +156,8 @@
                         { beschrijving: "Bureau schoonmaken", werknemer: null }
                     ] },
                     { dag: "Vrijdag", taken: [
-                        { beschrijving: "Tafeldekken & Vaatwasser uitruimen", werknemer: null },
+                        { beschrijving: "Tafeldekken", werknemer: null },
+                        { beschrijving: "Vaatwasser uitruimen", werknemer: null },
                         { beschrijving: "Afruimen", werknemer: null },
                         { beschrijving: "Vaatwasser starten", werknemer: null },
                         { beschrijving: "Vuilniszak legen", werknemer: null },
