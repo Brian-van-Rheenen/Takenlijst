@@ -32,7 +32,6 @@ class TakenController extends Controller
     public function opslaan()
     {
         $data = request('taken');
-        //Taak::truncate();
 
         foreach ($data as $dagen)
         {

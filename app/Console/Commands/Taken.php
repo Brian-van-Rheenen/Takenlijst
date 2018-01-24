@@ -65,7 +65,7 @@ class Taken extends Command
             if (sizeof($werknemers) > 0)
             {
                 // Create a constant to store your Slack URL
-                if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', 'https://hooks.slack.com/services/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');
+                if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', 'https://hooks.slack.com/services/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');
 
                 if (sizeof($werknemers) < 2)
                 {
