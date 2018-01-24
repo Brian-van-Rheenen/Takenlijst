@@ -11,4 +11,7 @@ class Werknemer extends Model
     protected $fillable = [
         'naam'
     ];
+    protected $hidden = [
+        'webhook'
+    ];
 }
