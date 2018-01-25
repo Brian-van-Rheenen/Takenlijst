@@ -26,13 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('takenlijst:taken')
-                 ->dailyAt('09:15');
+                 ->dailyAt('09:05');
 
         $schedule->command('takenlijst:taken')
-                 ->dailyAt('11:55');
-
-        $schedule->command('takenlijst:taken')
-                 ->dailyAt('12:15');
+                 ->dailyAt('11:45');
 
         $schedule->command('takenlijst:taken')
                  ->dailyAt('17:15');

@@ -50,17 +50,17 @@ class Tijden extends Command
             switch ($taak->taak)
             {
                 case 'Tafeldekken':
-                    $taak->tijd = '11:55';
+                    $taak->tijd = '11:45';
                     $taak->save();
                     break;
 
                 case 'Vaatwasser uitruimen':
-                    $taak->tijd = '09:15';
+                    $taak->tijd = '09:05';
                     $taak->save();
                     break;
 
                 case 'Afruimen':
-                    $taak->tijd = '12:15';
+                    $taak->tijd = '11:45';
                     $taak->save();
                     break;
 
@@ -70,7 +70,7 @@ class Tijden extends Command
                     break;
 
                 case 'Vuilniszak legen':
-                    $taak->tijd = '09:15';
+                    $taak->tijd = '09:05';
                     $taak->save();
                     break;
 
@@ -90,7 +90,7 @@ class Tijden extends Command
                     break;
 
                 case 'Koelkast schoonmaken':
-                    $taak->tijd = '09:15';
+                    $taak->tijd = '09:05';
                     $taak->save();
                     break;
 

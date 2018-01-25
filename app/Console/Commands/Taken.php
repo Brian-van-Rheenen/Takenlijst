@@ -77,7 +77,7 @@ class Taken extends Command
                             if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $persoon->webhook);
 
                             // Make your message
-                            $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet!: *' . $taak->taak . '*.')));
+                            $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet! *' . $taak->taak . '*.')));
 
                             // Use curl to send your message
                             $c = curl_init(SLACK_WEBHOOK);
@@ -96,7 +96,7 @@ class Taken extends Command
                         if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $werknemer[0]->webhook);
 
                         // Make your message
-                        $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet!: *' . $taak->taak . '*.')));
+                        $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet! *' . $taak->taak . '*.')));
 
                         // Use curl to send your message
                         $c = curl_init(SLACK_WEBHOOK);
