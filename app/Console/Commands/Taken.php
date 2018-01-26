@@ -77,7 +77,7 @@ class Taken extends Command
                             $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet! *' . $taak->taak . '*.')));
 
                             // Use curl to send your message
-                            $c = curl_init($werknemer[0]->webhook);
+                            $c = curl_init($persoon->webhook);
                             curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
                             curl_setopt($c, CURLOPT_POST, true);
                             curl_setopt($c, CURLOPT_POSTFIELDS, $message);
