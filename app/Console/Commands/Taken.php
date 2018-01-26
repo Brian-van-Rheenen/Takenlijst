@@ -73,14 +73,11 @@ class Taken extends Command
                         {
                             if($persoon->webhook == null) continue;
 
-                            // Create a constant to store your Slack URL
-                            if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $persoon->webhook);
-
                             // Make your message
                             $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet! *' . $taak->taak . '*.')));
 
                             // Use curl to send your message
-                            $c = curl_init(SLACK_WEBHOOK);
+                            $c = curl_init($werknemer[0]->webhook);
                             curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
                             curl_setopt($c, CURLOPT_POST, true);
                             curl_setopt($c, CURLOPT_POSTFIELDS, $message);
@@ -92,14 +89,11 @@ class Taken extends Command
                     {
                         if($werknemer[0]->webhook == null) continue;
 
-                        // Create a constant to store your Slack URL
-                        if (!defined('SLACK_WEBHOOK')) define('SLACK_WEBHOOK', $werknemer[0]->webhook);
-
                         // Make your message
                         $message = array('payload' => json_encode(array('text' => 'Vergeet je taak niet! *' . $taak->taak . '*.')));
 
                         // Use curl to send your message
-                        $c = curl_init(SLACK_WEBHOOK);
+                        $c = curl_init($werknemer[0]->webhook);
                         curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
                         curl_setopt($c, CURLOPT_POST, true);
                         curl_setopt($c, CURLOPT_POSTFIELDS, $message);
